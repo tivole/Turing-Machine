@@ -68,11 +68,12 @@ def Turing_Machine(Sequence_INPUT):
                 elif __CODE__[i][4] == 'S':
                     machine_arrow = machine_arrow  # STOP
                     STOP = True
+                break
 
-            Sequences_OUTPUT.append([copy.deepcopy(Sequence), state, machine_arrow, __CODE__[i][4]])
+        Sequences_OUTPUT.append([copy.deepcopy(Sequence), state, machine_arrow, __CODE__[i][4]])
 
-            if state == 'q0' and STOP == True:
-                TM_STOP = True
+        if state == 'q0' and STOP == True:
+            TM_STOP = True
 
 
 
