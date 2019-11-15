@@ -1,5 +1,5 @@
 ALPHABET = {(, ), X, A};
-EMPTY = {A};
+EMPTY = {A, 1};
 
 q1,( -> q1,(,R;
 q1,) -> q2,X,L;
