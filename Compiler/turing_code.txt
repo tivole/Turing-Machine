@@ -1,4 +1,4 @@
-ALPHABET = {(, ), X, A};
+ALPHABET = {(, ), X, A, 1, 0};
 EMPTY = {A, 1};
 
 q1,( -> q1,(,R;
@@ -17,4 +17,6 @@ q3,A -> q0,1,S;
 q4,( -> q4,A,L;
 q4,) -> q4,A,L;
 q4,X -> q4,A,L;
+q4,A -> q0,0,S;
+
 q4,A -> q0,0,S;

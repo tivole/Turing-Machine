@@ -18,12 +18,29 @@ import copy
 __code__ = open('turing_code.txt', 'r')
 
 __lines__ = __code__.readlines()
+__lines_backend__ = copy.deepcopy(__lines__)
+
 
 while '\n' in __lines__:
     __lines__.remove('\n')
 
+# Checking for sybols ';', ',' and '->'
+for __i__ in range(len(__lines__)):
+    assert ';' in __lines__[__i__], f'(!) Compilation Error. Missing \';\' in line {__lines_backend__.index(__lines__[__i__] + 1)}'
+    if __i__ > 1:
+        assert '->' in __lines__[__i__], f'(!) Compilation Error. Missing \'->\' in line {__lines_backend__.index(__lines__[__i__]) + 1}'
+        assert __lines__[__i__].count(',') == 3, f'(!) Compilation Error. Invalid syntax in line {__lines_backend__.index(__lines__[__i__]) + 1}'
+
+# Checking Alphabet
+assert 'ALPHABET' in __lines__[0], '(!) Compilation Error. ALPHABET Not Found!'
+
+# Checking Empty symbol
+assert 'EMPTY' in __lines__[1], '(!) Compilation Error. Empty symbol (\'EMPTY\') Not Found!'
+
 # Reading Alphabet
 __ALPHABET__ = __lines__[0][__lines__[0].find('{') + 1:__lines__[0].find('}')].replace(' ', '').split(',')
+
+# Reading Empty symbol
 __EMPTY__ = __lines__[1][__lines__[1].find('{') + 1:__lines__[1].find('}')].replace(' ', '').split(',')[0]
 __NUMBER_OF_EMPTY__ = int(__lines__[1][__lines__[1].find('{') + 1:__lines__[1].find('}')].replace(' ', '').split(',')[1])
 
@@ -31,6 +48,12 @@ __NUMBER_OF_EMPTY__ = int(__lines__[1][__lines__[1].find('{') + 1:__lines__[1].f
 __CODE__ = []
 for __i__ in range(2, len(__lines__)):
     __CODE__.append(tuple(__lines__[__i__][:__lines__[__i__].find(';')].replace(' ', '').replace('->', ',').split(',')))
+
+
+# Checking is all symbols from ALPHABET
+for __i__ in range(len(__CODE__)):
+    assert __CODE__[__i__][1] in __ALPHABET__, f'(!) Compilation Error. Symbol \'{__CODE__[__i__][1]}\' not found in the ALPHABET.'
+    assert __CODE__[__i__][3] in __ALPHABET__, f'(!) Compilation Error. Symbol \'{__CODE__[__i__][3]}\' not found in the ALPHABET.'
 
 
 def Turing_Machine(Sequence_INPUT):
