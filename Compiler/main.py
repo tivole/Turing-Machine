@@ -12,7 +12,7 @@ Sequences_OUTPUT = compiler.Turing_Machine(Sequence)
 
 
 Sequence_t = copy.deepcopy(Sequences_OUTPUT)
-
+"""
 pygame.font.init()
 
 
@@ -214,3 +214,4 @@ while run:
 
 pygame.quit()
 
+"""

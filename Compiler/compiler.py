@@ -54,6 +54,12 @@ for __i__ in range(2, len(__lines__)):
 for __i__ in range(len(__CODE__)):
     assert __CODE__[__i__][1] in __ALPHABET__, f'(!) Compilation Error. Symbol \'{__CODE__[__i__][1]}\' not found in the ALPHABET.'
     assert __CODE__[__i__][3] in __ALPHABET__, f'(!) Compilation Error. Symbol \'{__CODE__[__i__][3]}\' not found in the ALPHABET.'
+    assert __CODE__[__i__][4] in ['L', 'R', 'S'], f'(!) Compilation Error. Symbol \'{__CODE__[__i__][4]}\' is unknown. Use only L, R or S.'
+
+
+for __i__ in range(len(__CODE__)):
+    if __CODE__[__i__][2] != 'q0':
+        assert __CODE__[__i__][2] in [__CODE__[__j__][0] for __j__ in range(len(__CODE__))], f'(!) Compilation Error. Udefined state \'{__CODE__[__i__][2]}\''
 
 
 def Turing_Machine(Sequence_INPUT):
