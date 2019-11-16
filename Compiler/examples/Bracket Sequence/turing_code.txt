@@ -1,0 +1,20 @@
+ALPHABET = {(, ), X, A, 1, 0};
+EMPTY = {A, 1};
+
+q1,( -> q1,(,R;
+q1,) -> q2,X,L;
+q1,X -> q1,X,R;
+q1,A -> q3,A,L;
+
+q2,( -> q1,X,R;
+q2,X -> q2,X,L;
+q2,A -> q4,A,R;
+
+q3,( -> q0,0,S;
+q3,X -> q3,A,L;
+q3,A -> q0,1,S;
+
+q4,( -> q4,A,L;
+q4,) -> q4,A,L;
+q4,X -> q4,A,L;
+q4,A -> q0,0,S;

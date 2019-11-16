@@ -62,6 +62,10 @@ for __i__ in range(len(__CODE__)):
         assert __CODE__[__i__][2] in [__CODE__[__j__][0] for __j__ in range(len(__CODE__))], f'(!) Compilation Error. Udefined state \'{__CODE__[__i__][2]}\''
 
 
+def get_empty_symbol():
+    return __EMPTY__
+
+
 def Turing_Machine(Sequence_INPUT):
     """
         Function to program Turing Machine code.
@@ -100,6 +104,7 @@ def Turing_Machine(Sequence_INPUT):
                 break
 
         Sequences_OUTPUT.append([copy.deepcopy(Sequence), state, machine_arrow, __CODE__[i][4]])
+        print(Sequences_OUTPUT[-1])
 
         if state == 'q0' and STOP == True:
             TM_STOP = True

@@ -10,9 +10,11 @@ Sequence = input_s.readline()
 Sequences_OUTPUT = compiler.Turing_Machine(Sequence)
 
 
-
 Sequence_t = copy.deepcopy(Sequences_OUTPUT)
-"""
+
+
+EMPTY = compiler.get_empty_symbol()
+
 pygame.font.init()
 
 
@@ -29,7 +31,7 @@ def draw_rect(screen, color, x, y, width, height, border, symbol, text_color):
     pygame.draw.rect(win, clr, [x, y, width, height], border)
     text = FONT.render(symbol, 1, text_color)
 
-    if text_color == (255, 255, 255) and symbol == 'A':
+    if text_color == (255, 255, 255) and symbol == EMPTY:
         text = FONT.render(symbol, 1, (150, 150, 150))
 
     win.blit(text, (x + 25, y + 25))
@@ -214,4 +216,3 @@ while run:
 
 pygame.quit()
 
-"""
