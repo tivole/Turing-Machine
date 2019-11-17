@@ -92,7 +92,10 @@ __ALPHABET__ = __lines__[0][__lines__[0].find('{') + 1:__lines__[0].find('}')].r
 
 # Reading Empty symbol
 __EMPTY__ = __lines__[1][__lines__[1].find('{') + 1:__lines__[1].find('}')].replace(' ', '').split(',')[0]
-__NUMBER_OF_EMPTY__ = int(__lines__[1][__lines__[1].find('{') + 1:__lines__[1].find('}')].replace(' ', '').split(',')[1])
+if __lines__[1][__lines__[1].find('{') + 1:__lines__[1].find('}')].count(',') == 1:
+    __NUMBER_OF_EMPTY__ = int(__lines__[1][__lines__[1].find('{') + 1:__lines__[1].find('}')].replace(' ', '').split(',')[1])
+else:
+    __NUMBER_OF_EMPTY__ = 25
 
 # Readding START_STATE and STOP_STATE
 __START_STATE__ = __lines__[2][__lines__[2].find('{') + 1:__lines__[2].find('}')].replace(' ', '')

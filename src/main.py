@@ -79,15 +79,14 @@ clr = (255, 255, 0)
 border = 5
 space = 5
 
-L = 0
-
 t = 0
 run = True
 
 left = False
 right = False
 
-prev = 1
+prev = Sequence_t[0][2]
+L = prev - 1
 prev_st = 'q1'
 prev_sym = Sequence_t[0][0][1]
 

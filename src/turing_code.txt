@@ -1,5 +1,5 @@
 ALPHABET = {(, ), X, A, 1, 0};
-EMPTY = {A, 1};
+EMPTY = {A};
 START_STATE = {q1};
 STOP_STATE = {q0};
 
