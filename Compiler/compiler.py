@@ -5,13 +5,6 @@
 
 """
 
-"""
-    TODO list:
-
-    1) TODO: Check syntax correction.
-
-"""
-
 # Libraries
 import copy
 
@@ -24,8 +17,9 @@ __lines_backend__ = copy.deepcopy(__lines__)
 while '\n' in __lines__:
     __lines__.remove('\n')
 
-# Checking for sybols ';', ',', '->', '{' and '}'
+# Checking for symbols ';', ',', '->', '{' and '}'
 __passed_lines__ = 0
+__checked_codes__ = []
 for __i__ in range(len(__lines__)):
     __passed_lines__ += 1
     if '#' in __lines__[__i__]:
@@ -36,10 +30,23 @@ for __i__ in range(len(__lines__)):
     else:
         __checking_line__ = __lines__[__i__]
 
+    # Check for symbol ';'
     assert ';' in __checking_line__, f'(!) Compilation Error. Missing \';\' in line {__lines_backend__.index(__lines__[__i__]) + 1}'
+    
     if __passed_lines__ >= 5:
+        # Check for symbol '->'
         assert '->' in __checking_line__, f'(!) Compilation Error. Missing \'->\' in line {__lines_backend__.index(__lines__[__i__]) + 1}'
+        
+        # Check for symbol ','
         assert __checking_line__.count(',') == 3, f'(!) Compilation Error. Invalid syntax in line {__lines_backend__.index(__lines__[__i__]) + 1}'
+
+        # Check for unkown commands
+        __unknown_command__ = __checking_line__[__checking_line__.find(';') + 1:].replace('\n', '')
+        assert __checking_line__[__checking_line__.find(';') + 1:].replace(' ', '').replace('\n', '') in '', f'(!) Compilation Error. Unkown command \'{__unknown_command__}\' in line {__lines_backend__.index(__lines__[__i__]) + 1}'
+    
+        # Check for double commands
+        assert not __checking_line__.replace('\n', '') in __checked_codes__, f'(!) Compilation Error. Doubled Turing code in line {__lines_backend__.index(__lines__[__i__]) + 1}'
+        __checked_codes__.append(__checking_line__.replace('\n', ''))
     else:
         assert '{' in __checking_line__, '(!) Compilation Error. Missing \'{\'' + f' in line {__lines_backend__.index(__lines__[__i__]) + 1}'
         assert '}' in __checking_line__, '(!) Compilation Error. Missing \'}\'' + f' in line {__lines_backend__.index(__lines__[__i__]) + 1}'

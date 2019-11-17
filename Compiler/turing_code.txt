@@ -1,18 +1,9 @@
-# (c) Tivole
-# Miwkalas;;
-# Miwkalas;;
-# Miwkalas;;
-# Miwkalas;;# Miwkalas;;
-# Miwkalas;;
-# Miwkalas;;
-
-
-ALPHABET = {1, A, *, $}; 
+ALPHABET = {1, A, *, $};
 EMPTY = {A, 5};
 START_STATE = {q1};
 STOP_STATE = {q0};
 
-q1,1 -> q1,1,R; # ,,,
+q1,1 -> q1,1,R;
 q1,A -> q3,*,L;
 
 q3,* -> q3,*,L;
@@ -24,7 +15,6 @@ q4,1 -> q5,$,R;
 q4,* -> q6,1,L;
 
 q5,1 -> q5,1,R;
-q5,* -> q5,*,R;
 q5,A -> q3,1,L;
 
 q6,$ -> q6,1,L;
