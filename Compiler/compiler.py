@@ -20,6 +20,31 @@ __code__ = open('turing_code.txt', 'r')
 __lines__ = __code__.readlines()
 __lines_backend__ = copy.deepcopy(__lines__)
 
+# Removing empty lines
+while '\n' in __lines__:
+    __lines__.remove('\n')
+
+# Checking for sybols ';', ',', '->', '{' and '}'
+__passed_lines__ = 0
+for __i__ in range(len(__lines__)):
+    __passed_lines__ += 1
+    if '#' in __lines__[__i__]:
+        __checking_line__ = __lines__[__i__][:__lines__[__i__].find('#')]
+        if __checking_line__ == '':
+            __passed_lines__ -= 1
+            continue
+    else:
+        __checking_line__ = __lines__[__i__]
+
+    assert ';' in __checking_line__, f'(!) Compilation Error. Missing \';\' in line {__lines_backend__.index(__lines__[__i__]) + 1}'
+    if __passed_lines__ >= 5:
+        assert '->' in __checking_line__, f'(!) Compilation Error. Missing \'->\' in line {__lines_backend__.index(__lines__[__i__]) + 1}'
+        assert __checking_line__.count(',') == 3, f'(!) Compilation Error. Invalid syntax in line {__lines_backend__.index(__lines__[__i__]) + 1}'
+    else:
+        assert '{' in __checking_line__, '(!) Compilation Error. Missing \'{\'' + f' in line {__lines_backend__.index(__lines__[__i__]) + 1}'
+        assert '}' in __checking_line__, '(!) Compilation Error. Missing \'}\'' + f' in line {__lines_backend__.index(__lines__[__i__]) + 1}'
+
+
 # Removing commentaries for compiling
 for __i__ in range(len(__lines__)):
     if '#' in __lines__[__i__]:
@@ -27,6 +52,7 @@ for __i__ in range(len(__lines__)):
             __lines__[__i__] = __lines__[__i__][:__lines__[__i__].find('#')]
         else:
             __lines__[__i__] = '\n'
+
 
 # Removing unnecessary symbols for compiling
 for __i__ in range(len(__lines__)):
@@ -38,16 +64,11 @@ for __i__ in range(len(__lines__)):
     if '\n' in __lines__[__i__]:
         __lines__[__i__] = __lines__[__i__].replace('\n', '')
 
+
 # Removing empty lines
 while '' in __lines__:
     __lines__.remove('')
 
-# Checking for sybols ';', ',' and '->'
-for __i__ in range(len(__lines__)):
-    assert ';' in __lines__[__i__], f'(!) Compilation Error. Missing \';\' in line {__lines_backend__.index(__lines__[__i__] + 1)}'
-    if __i__ >= 4:
-        assert '->' in __lines__[__i__], f'(!) Compilation Error. Missing \'->\' in line {__lines_backend__.index(__lines__[__i__]) + 1}'
-        assert __lines__[__i__].count(',') == 3, f'(!) Compilation Error. Invalid syntax in line {__lines_backend__.index(__lines__[__i__]) + 1}'
 
 # Checking Alphabet
 assert 'ALPHABET' in __lines__[0], '(!) Compilation Error. ALPHABET is missing!'
