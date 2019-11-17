@@ -1,3 +1,10 @@
+"""
+    (c) Tivole
+
+    Visualisator for 'Turing Machine'
+
+"""
+
 import compiler
 import pygame
 import time
@@ -18,7 +25,7 @@ EMPTY = compiler.get_empty_symbol()
 pygame.font.init()
 
 
-DELAY_TIME = 6
+DELAY_TIME = 5
 WIDTH = 805
 HEIGHT = 500
 FONT = pygame.font.SysFont("comicsans", 50)
@@ -45,31 +52,22 @@ def draw_circle(screen, color, x, y, R, border, symbol):
 
 
 def print_command(prev, prev_st, prev_sym, st, sym, direction):
-    pygame.draw.rect(win, (0, 0, 0), [260, 330, 350, 90])
+    pygame.draw.rect(win, (0, 0, 0), [250, 330, 350, 90])
     text = pygame.font.SysFont("Arial", 50).render(f'{prev_st} {prev_sym} -> {st} {sym} {direction}', 1, (255, 255, 255))
-    win.blit(text, (270, 340))
+    win.blit(text, (250, 340))
 
 
-def print_sequence_type(sym):
-    pygame.draw.rect(win, (0, 0, 0), [260, 330, 350, 90])
-
-    text = pygame.font.SysFont("Arial", 50).render(f'IMPOSSIBLE', 1, (0, 0, 0))
-
-    if sym == '1':
-        text = pygame.font.SysFont("Arial", 50).render(f'YES', 1, (0, 255, 0))
-    elif sym == '0':
-        text = pygame.font.SysFont("Arial", 50).render(f'NO', 1, (255, 0, 0))
-    
-    win.blit(text, (340, 340))
+def print_done(sym):
+    pygame.draw.rect(win, (0, 0, 0), [250, 330, 350, 90])
+    text = pygame.font.SysFont("Arial", 50).render(f'DONE', 1, (235, 189, 52))
+    win.blit(text, (320, 340))
 
 
 def print_tivole():
-    # Cantarell
-    # Latin Modern Mono Prop
     text_1 = pygame.font.SysFont("Cantarell", 35, bold=True).render(f'Coded by', 1, (255, 255, 255))
     text_2 = pygame.font.SysFont("Cantarell", 35, bold=True).render(f'tivole', 1, (0, 255, 45))
-    win.blit(text_1, (220 + 35, 10))
-    win.blit(text_2, (375 + 35, 10))
+    win.blit(text_1, (220 + 45, 10))
+    win.blit(text_2, (375 + 45, 10))
 
 
 x = 5
@@ -132,7 +130,7 @@ while run:
                 if t != len(Sequence_t) - 1:
                     print_command(prev, prev_st, prev_sym, st, Sequence_t[t][0][ma], Sequence_t[t+1][3])
                 else:
-                    print_sequence_type(Sequence_t[t][0][ma])
+                    print_done(Sequence_t[t][0][ma])
         elif left:
             for k in range(80*L, 80*(L-1) - 1, -1):
                 pygame.draw.rect(win, (0, 0, 0), [0, 115, 805, 85])
@@ -152,7 +150,7 @@ while run:
                 if t != len(Sequence_t) - 1:
                     print_command(prev, prev_st, prev_sym, st, Sequence_t[t][0][ma], Sequence_t[t+1][3])
                 else:
-                    print_sequence_type(Sequence_t[t][0][ma])
+                    print_done(Sequence_t[t][0][ma])
         elif right:
             for k in range(80*(L-1), 80*L + 1):
                 pygame.draw.rect(win, (0, 0, 0), [0, 115, 805, 85])
@@ -172,7 +170,7 @@ while run:
                 if t != len(Sequence_t) - 1:
                     print_command(prev, prev_st, prev_sym, st, Sequence_t[t][0][ma], Sequence_t[t+1][3])
                 else:
-                    print_sequence_type(Sequence_t[t][0][ma])
+                    print_done(Sequence_t[t][0][ma])
 
         if left or right or prev == ma:
             pygame.draw.rect(win, (0, 0, 0), [0, 200, 805, 60])
