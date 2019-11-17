@@ -20,9 +20,27 @@ __code__ = open('turing_code.txt', 'r')
 __lines__ = __code__.readlines()
 __lines_backend__ = copy.deepcopy(__lines__)
 
+# Removing commentaries for compiling
+for __i__ in range(len(__lines__)):
+    if '#' in __lines__[__i__]:
+        if __lines__[__i__].find('#') > 0:
+            __lines__[__i__] = __lines__[__i__][:__lines__[__i__].find('#')]
+        else:
+            __lines__[__i__] = '\n'
 
-while '\n' in __lines__:
-    __lines__.remove('\n')
+# Removing unnecessary symbols for compiling
+for __i__ in range(len(__lines__)):
+    # Removing ' '
+    if ' ' in __lines__[__i__]:
+        __lines__[__i__] = __lines__[__i__].replace(' ', '')
+
+    # Removing '\n'
+    if '\n' in __lines__[__i__]:
+        __lines__[__i__] = __lines__[__i__].replace('\n', '')
+
+# Removing empty lines
+while '' in __lines__:
+    __lines__.remove('')
 
 # Checking for sybols ';', ',' and '->'
 for __i__ in range(len(__lines__)):
@@ -43,6 +61,9 @@ __ALPHABET__ = __lines__[0][__lines__[0].find('{') + 1:__lines__[0].find('}')].r
 # Reading Empty symbol
 __EMPTY__ = __lines__[1][__lines__[1].find('{') + 1:__lines__[1].find('}')].replace(' ', '').split(',')[0]
 __NUMBER_OF_EMPTY__ = int(__lines__[1][__lines__[1].find('{') + 1:__lines__[1].find('}')].replace(' ', '').split(',')[1])
+
+# Checking EMPTY symbol
+assert __EMPTY__ in __ALPHABET__, f'(!) Compilation Error. Empty symbol \'{__EMPTY__}\' is not found in ALPHABET.'
 
 # Reading codes
 __CODE__ = []
@@ -70,6 +91,11 @@ def Turing_Machine(Sequence_INPUT):
     """
         Function to program Turing Machine code.
     """
+
+    # Checking INPUT Sequence
+    for c in Sequence_INPUT:
+        assert c in __ALPHABET__, f'(!) Compilation Error. Unknown symbol \'{c}\' in input data. Check ALPHABET.'
+
     Sequence_INPUT = list(__EMPTY__ * __NUMBER_OF_EMPTY__ + Sequence_INPUT + __EMPTY__ * __NUMBER_OF_EMPTY__)
     Sequence = copy.deepcopy(Sequence_INPUT)
     
@@ -86,12 +112,12 @@ def Turing_Machine(Sequence_INPUT):
 
     TM_STOP = False
 
-    
-
     while not TM_STOP:
+        Find = False
         for i in range(len(__CODE__)):
             STOP = False
             if state == __CODE__[i][0] and Sequence[machine_arrow] == __CODE__[i][1]:
+                Find = True
                 Sequence[machine_arrow] = __CODE__[i][3]
                 state = __CODE__[i][2]
                 if __CODE__[i][4] == 'R':
@@ -103,8 +129,11 @@ def Turing_Machine(Sequence_INPUT):
                     STOP = True
                 break
 
+        if not Find:
+            assert Find, f'(!) Compilation Error. Undefined action for state=\'{state}\' and symbol \'{Sequence[machine_arrow]}\'.'
+            break
+
         Sequences_OUTPUT.append([copy.deepcopy(Sequence), state, machine_arrow, __CODE__[i][4]])
-        print(Sequences_OUTPUT[-1])
 
         if state == 'q0' and STOP == True:
             TM_STOP = True
