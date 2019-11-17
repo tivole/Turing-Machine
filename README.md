@@ -28,7 +28,7 @@ a special symbol called blank. It also consists of a head pointer which points t
 
 # At the beginning you must write initializations:
 ALPHABET = {X_1, ... ,X_N}; # X_1, ... ,X_N - are symbols of TM Alphabet
-EMPTY = {X_i};              # X_i - is empty symbol of ALPHABET
+EMPTY = {X_i};              # X_i - is empty (blank) symbol of ALPHABET
 START_STATE = {q1};         # q1 - is initial state of TM
 STOP_STATE = {q0};          # q0 - is last (halt) state of TM
 
@@ -37,3 +37,28 @@ qi,X_i -> qj,X_j,R;         # The syntax is: CURRENT_STATE,CURRENT_SYMBOL -> NEX
 ```
 
 [Here you can find an examples of code in this syntax.](src/examples/README.md)
+
+## Visualisator
+
+...
+
+
+## Installation of Turing_Machine
+
+<i>Make sure you have installed [Python 3](https://www.python.org/).</i>
+
+<b>Clone repository:</b>
+* Run `git clone https://github.com/tivole/Turing_Machine.git` to clone repository.
+* Run `cd Turing_Machine/src` to change directory.
+
+<b>Install requirements:</b>
+* Run `pip install -r requirements.txt` to install required libraries.
+
+Now you can use Turing_Machine.
+
+
+## Usage of Compilator and Visualisator
+
+1. Write your TM code in `turing_code.txt`
+2. Write your INPUT sequnce in `input.txt`
+3. Run in terminal: `python3 main.py`
