@@ -8,6 +8,9 @@ The Turing Machine is an extension of the finite state machine and, according to
 
 That is, any intuitive algorithm can be implemented using some Turing machine.
 
+<p align="center">
+  <img src="img/TurigMachine.png">
+</p>
 
 A turing machine consists of a tape of infinite length on which read and writes operation can be performed. The tape consists of infinite cells on which each cell either contains input symbol or
 a special symbol called blank. It also consists of a head pointer which points to cell currently being read and it can move in both directions. A TM is expressed as a 7-tuple (<b>Q</b>, <b>T</b>, <b>B</b>, <b>∑</b>, <b>δ</b>, <b>q0</b>, <b>F</b>) where:
@@ -40,7 +43,7 @@ qi,X_i -> qj,X_j,R;         # The syntax is: CURRENT_STATE,CURRENT_SYMBOL -> NEX
 
 ## Visualisator
 
-...
+<b>TODO</b>: Add Visualisator animate gif
 
 
 ## Installation of Turing_Machine
@@ -62,3 +65,9 @@ Now you can use Turing_Machine.
 1. Write your TM code in `turing_code.txt`
 2. Write your INPUT sequnce in `input.txt`
 3. Run in terminal: `python3 main.py`
+
+
+## References
+
+1. [Turing's paper](https://londmathsoc.onlinelibrary.wiley.com/doi/abs/10.1112/plms/s2-42.1.230)
+2. [The Church-Turing Thesis](https://plato.stanford.edu/entries/church-turing/)
