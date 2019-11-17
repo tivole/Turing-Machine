@@ -16,4 +16,4 @@ STOP_STATE = {q0};          # q0 - is last (halt) state of TM
 qi,X_i -> qj,X_j,R;         # The syntax is: CURRENT_STATE,CURRENT_SYMBOL -> NEXT_STAGE,ACTION,MOVE;
 ```
 
-[Here you can find an examples of code in this syntax.](examples/README.md)
+[Here you can find an examples of code in this syntax.](src/examples/README.md)
