@@ -45,15 +45,19 @@ while '' in __lines__:
 # Checking for sybols ';', ',' and '->'
 for __i__ in range(len(__lines__)):
     assert ';' in __lines__[__i__], f'(!) Compilation Error. Missing \';\' in line {__lines_backend__.index(__lines__[__i__] + 1)}'
-    if __i__ > 1:
+    if __i__ >= 4:
         assert '->' in __lines__[__i__], f'(!) Compilation Error. Missing \'->\' in line {__lines_backend__.index(__lines__[__i__]) + 1}'
         assert __lines__[__i__].count(',') == 3, f'(!) Compilation Error. Invalid syntax in line {__lines_backend__.index(__lines__[__i__]) + 1}'
 
 # Checking Alphabet
-assert 'ALPHABET' in __lines__[0], '(!) Compilation Error. ALPHABET Not Found!'
+assert 'ALPHABET' in __lines__[0], '(!) Compilation Error. ALPHABET is missing!'
 
 # Checking Empty symbol
-assert 'EMPTY' in __lines__[1], '(!) Compilation Error. Empty symbol (\'EMPTY\') Not Found!'
+assert 'EMPTY' in __lines__[1], '(!) Compilation Error. Empty symbol (\'EMPTY\') is missing!'
+
+# Checking START_STATE and STOP_STATE 
+assert 'START_STATE' in __lines__[2], '(!) Compilation Error. START_STATE is missing!'
+assert 'STOP_STATE' in __lines__[3], '(!) Compilation Error. STOP_STATE is missing!'
 
 # Reading Alphabet
 __ALPHABET__ = __lines__[0][__lines__[0].find('{') + 1:__lines__[0].find('}')].replace(' ', '').split(',')
@@ -62,12 +66,16 @@ __ALPHABET__ = __lines__[0][__lines__[0].find('{') + 1:__lines__[0].find('}')].r
 __EMPTY__ = __lines__[1][__lines__[1].find('{') + 1:__lines__[1].find('}')].replace(' ', '').split(',')[0]
 __NUMBER_OF_EMPTY__ = int(__lines__[1][__lines__[1].find('{') + 1:__lines__[1].find('}')].replace(' ', '').split(',')[1])
 
+# Readding START_STATE and STOP_STATE
+__START_STATE__ = __lines__[2][__lines__[2].find('{') + 1:__lines__[2].find('}')].replace(' ', '')
+__STOP_STATE__ = __lines__[3][__lines__[3].find('{') + 1:__lines__[3].find('}')].replace(' ', '')
+
 # Checking EMPTY symbol
 assert __EMPTY__ in __ALPHABET__, f'(!) Compilation Error. Empty symbol \'{__EMPTY__}\' is not found in ALPHABET.'
 
 # Reading codes
 __CODE__ = []
-for __i__ in range(2, len(__lines__)):
+for __i__ in range(4, len(__lines__)):
     __CODE__.append(tuple(__lines__[__i__][:__lines__[__i__].find(';')].replace(' ', '').replace('->', ',').split(',')))
 
 
@@ -77,10 +85,13 @@ for __i__ in range(len(__CODE__)):
     assert __CODE__[__i__][3] in __ALPHABET__, f'(!) Compilation Error. Symbol \'{__CODE__[__i__][3]}\' not found in the ALPHABET.'
     assert __CODE__[__i__][4] in ['L', 'R', 'S'], f'(!) Compilation Error. Symbol \'{__CODE__[__i__][4]}\' is unknown. Use only L, R or S.'
 
-
+# Checking is all states defined
 for __i__ in range(len(__CODE__)):
-    if __CODE__[__i__][2] != 'q0':
+    if __CODE__[__i__][2] != __STOP_STATE__:
         assert __CODE__[__i__][2] in [__CODE__[__j__][0] for __j__ in range(len(__CODE__))], f'(!) Compilation Error. Udefined state \'{__CODE__[__i__][2]}\''
+
+# Checking is __START_STATE__ defined
+assert __START_STATE__ in [__CODE__[__j__][0] for __j__ in range(len(__CODE__))], f'(!) Compilation Error. Start state \'{__START_STATE__}\' is undefined.'
 
 
 def get_empty_symbol():
@@ -99,10 +110,10 @@ def Turing_Machine(Sequence_INPUT):
     Sequence_INPUT = list(__EMPTY__ * __NUMBER_OF_EMPTY__ + Sequence_INPUT + __EMPTY__ * __NUMBER_OF_EMPTY__)
     Sequence = copy.deepcopy(Sequence_INPUT)
     
-    state = 'q1' # The first state must be 'q1' TODO: check in syntax
+    state = __START_STATE__
 
-    machine_arrow = 0
     # Put the machine_arrow in the right place
+    machine_arrow = 0
     while Sequence_INPUT[machine_arrow] == __EMPTY__:
         machine_arrow += 1
 
@@ -135,9 +146,8 @@ def Turing_Machine(Sequence_INPUT):
 
         Sequences_OUTPUT.append([copy.deepcopy(Sequence), state, machine_arrow, __CODE__[i][4]])
 
-        if state == 'q0' and STOP == True:
+        if state == __STOP_STATE__ and STOP == True:
             TM_STOP = True
-
 
 
     return Sequences_OUTPUT

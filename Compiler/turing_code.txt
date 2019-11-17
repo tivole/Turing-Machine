@@ -1,7 +1,9 @@
 ALPHABET = {1, A, *, $};
 EMPTY = {A, 5};
+START_STATE = {q1};
+STOP_STATE = {q0};
 
- #q1,1 -> q1,1,R;
+q1,1 -> q1,1,R;
 q1,A -> q3,*,L;
 
 q3,* -> q3,*,L;

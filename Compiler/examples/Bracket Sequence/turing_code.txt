@@ -1,5 +1,7 @@
 ALPHABET = {(, ), X, A, 1, 0};
 EMPTY = {A, 1};
+START_STATE = {q1};
+STOP_STATE = {q0};
 
 q1,( -> q1,(,R;
 q1,) -> q2,X,L;
