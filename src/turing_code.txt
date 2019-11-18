@@ -1,21 +1,22 @@
-ALPHABET = {_, a, b, c};
+ALPHABET = {(, ), X, _, 1, 0};
 EMPTY = {_};
 START_STATE = {q1};
 STOP_STATE = {q0};
 
-q1,a -> q1,a,R;
-q1,b -> q1,b,R;
-q1,c -> q1,c,R;
-q1,_ -> q2,_,L;
+q1,( -> q1,(,R;
+q1,) -> q2,X,L;
+q1,X -> q1,X,R;
+q1,_ -> q3,_,L;
 
-q2,a -> q4,_,R;
-q4,_ -> q3,a,L;
+q2,( -> q1,X,R;
+q2,X -> q2,X,L;
+q2,_ -> q4,_,R;
 
-q2,b -> q5,_,R;
-q5,_ -> q3,b,L;
+q3,( -> q0,0,S;
+q3,X -> q3,_,L;
+q3,_ -> q0,1,S;
 
-q2,c -> q6,_,R;
-q6,_ -> q3,c,L;
-
-q3,_ -> q2,_,L;
-q2,_ -> q0,_,S;
+q4,( -> q4,_,L;
+q4,) -> q4,_,L;
+q4,X -> q4,_,L;
+q4,_ -> q0,0,S;
