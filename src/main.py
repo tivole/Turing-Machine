@@ -25,7 +25,7 @@ EMPTY = compiler.get_empty_symbol()
 pygame.font.init()
 
 
-DELAY_TIME = 4
+DELAY_TIME = 6
 WIDTH = 805
 HEIGHT = 500
 FONT = pygame.font.SysFont("comicsans", 50)
