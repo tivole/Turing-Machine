@@ -43,8 +43,14 @@ qi,X_i -> qj,X_j,R;         # The syntax is: CURRENT_STATE,CURRENT_SYMBOL -> NEX
 
 ## Visualisator
 
-<b>TODO</b>: Add Visualisator animate gif
+<b>Here is an example of visualisation for Turing Machine, which checks balancing bracket sequence:</b>
 
+<p align="center">
+  <img src="src/examples/Bracket%20Sequence/img/Bracket_Sequence.gif">
+</p>
+
+
+[Here you can find more visualisations of different turing machines.](src/examples/README.md)
 
 ## Installation of Turing_Machine
 
