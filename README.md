@@ -43,7 +43,7 @@ qi,X_i -> qj,X_j,R;         # The syntax is: CURRENT_STATE,CURRENT_SYMBOL -> NEX
 
 ## Visualisator
 
-<b>Here is an example of visualisation for Turing Machine, which checks balancing bracket sequence:</b>
+<b>Here is an example of visualisation for Turing Machine, which checks [balancing bracket sequence](src/examples/Bracket%20Sequence/README.md):</b>
 
 <p align="center">
   <img src="src/examples/Bracket%20Sequence/img/Bracket_Sequence.gif">
