@@ -25,7 +25,7 @@ EMPTY = compiler.get_empty_symbol()
 pygame.font.init()
 
 
-DELAY_TIME = 5
+DELAY_TIME = 10
 WIDTH = 805
 HEIGHT = 500
 FONT = pygame.font.SysFont("comicsans", 50)
@@ -127,7 +127,7 @@ while run:
                     draw_rect(win, clr, x - 80*L, y, width, height, border, sym, (255, 255, 255))
 
                 if t != len(Sequence_t) - 1:
-                    print_command(prev, prev_st, prev_sym, st, Sequence_t[t][0][ma], Sequence_t[t+1][3])
+                    print_command(prev, prev_st, prev_sym, st, Sequence_t[t+1][0][ma], Sequence_t[t+1][3])
                 else:
                     print_done(Sequence_t[t][0][ma])
         elif left:
@@ -147,7 +147,7 @@ while run:
                 pygame.time.delay(DELAY_TIME)
 
                 if t != len(Sequence_t) - 1:
-                    print_command(prev, prev_st, prev_sym, st, Sequence_t[t][0][ma], Sequence_t[t+1][3])
+                    print_command(prev, prev_st, prev_sym, st, Sequence_t[t+1][0][ma], Sequence_t[t+1][3])
                 else:
                     print_done(Sequence_t[t][0][ma])
         elif right:
@@ -167,7 +167,7 @@ while run:
                 pygame.time.delay(DELAY_TIME)
 
                 if t != len(Sequence_t) - 1:
-                    print_command(prev, prev_st, prev_sym, st, Sequence_t[t][0][ma], Sequence_t[t+1][3])
+                    print_command(prev, prev_st, prev_sym, st, Sequence_t[t+1][0][ma], Sequence_t[t+1][3])
                 else:
                     print_done(Sequence_t[t][0][ma])
 
@@ -204,7 +204,7 @@ while run:
         prev_st = st
         
         if t != len(Sequence_t) - 1:
-            prev_sym = Sequence_t[t+1][0][1]
+            prev_sym = Sequence_t[t+1][0][Sequence_t[t+1][2]]
 
         t += 1
 
